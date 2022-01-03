@@ -1,9 +1,9 @@
 public class Check {
         public static void check(String[] purchase, String category) {
-            if (category.equals("промо") && purchase.length == 1) {
+            if (category.equals("ПРОМО") && purchase.length == 1) {
                 throw new IllegalArgumentException("Отсутствует размер скидки");
             }
-            if (!(category.equals("промо")) && purchase.length == 1) {
+            if (!(category.equals("ПРОМО")) && purchase.length == 1) {
                 throw new IllegalArgumentException("Отсутствует цена покупки");
             }
         }

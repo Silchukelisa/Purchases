@@ -15,39 +15,38 @@ public class FillingHashTable {
         }
     }
 
-    public static void fillInTable(ArrayList<String> list, HashMap<String, Integer> purchases, HashMap<String, Integer> promoСodes) {
+    public void fillInTable(ArrayList<String> list, HashMap<String, Integer> purchases, HashMap<String, Integer> promoCodes) {
         String category;
         int price;
         String promo;
-        String strpromo = "промо";
-        Check check = new Check();
+        String STR_PROMO = "ПРОМО";
         System.out.println("\n");
         for (int i = 0; i < list.size() - 1; i++) {
             String[] purchase = list.get(i).split(" ");
             category = purchase[0];
-            check.check(purchase, category);
+            Check.check(purchase, category);
 
-            if (!(category.equals(strpromo))) {
-                check.check(purchase);
+            if (!(category.equals(STR_PROMO))) {
+                Check.check(purchase);
                 price = Integer.parseInt(purchase[1]);
                 int finalPrice = price;
                 purchases.computeIfPresent(category, (key, value) -> value += finalPrice);
                 purchases.computeIfAbsent(category, value -> getPrice(finalPrice));
             }
-            if (purchase.length == 3 && category.equals(strpromo)) {
+            if (purchase.length == 3 && category.equals(STR_PROMO)) {
                 category = purchase[1];
                 price = Integer.parseInt(purchase[2]);
                 int finalPrice = price;
-                promoСodes.computeIfPresent(category, (key, value) -> value = getPrice(value, finalPrice));
-                promoСodes.computeIfAbsent(category, value -> getPrice(finalPrice));
+                promoCodes.computeIfPresent(category, (key, value) -> value = getPrice(value, finalPrice));
+                promoCodes.computeIfAbsent(category, value -> getPrice(finalPrice));
             }
-            if (purchase.length == 2 && category.equals(strpromo)) {
-                check.check(purchase);
+            if (purchase.length == 2 && category.equals(STR_PROMO)) {
+                Check.check(purchase);
                 promo = purchase[0];
                 price = Integer.parseInt(purchase[1]);
                 int finalPrice = price;
-                promoСodes.computeIfPresent(promo, (key, value) -> value = getPrice(value, finalPrice));
-                promoСodes.computeIfAbsent(category, value -> getPrice(finalPrice));
+                promoCodes.computeIfPresent(promo, (key, value) -> value = getPrice(value, finalPrice));
+                promoCodes.computeIfAbsent(category, value -> getPrice(finalPrice));
             }
         }
     }

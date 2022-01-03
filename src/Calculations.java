@@ -1,31 +1,30 @@
 import java.util.HashMap;
 import java.util.Set;
 
-public class Сalculations {
+public class Calculations {
 
-    public static void ChooseDiscount( HashMap<String, Integer> purchases, HashMap<String, Integer> promoСodes) {
-        String strpromo = "промо";
+    public void chooseDiscount( HashMap<String, Integer> purchases, HashMap<String, Integer> promoCodes) {
+        String STR_PROMO = "ПРОМО";
         int discountByCategory = 0;
         int discount;
         int sum = 0;
-        Set<HashMap.Entry<String, Integer>> set = promoСodes.entrySet();
+        Set<HashMap.Entry<String, Integer>> set = promoCodes.entrySet();
         Set<HashMap.Entry<String, Integer>> sets = purchases.entrySet();
         for (HashMap.Entry<String, Integer> hm : set) {
             if (purchases.containsKey(hm.getKey())) {
-                discountByCategory += promoСodes.get(hm.getKey());
+                discountByCategory += promoCodes.get(hm.getKey());
             }
         }
-        discount = promoСodes.get(strpromo);
+        discount = promoCodes.get(STR_PROMO);
 
         if (discountByCategory > discount) {
             for (HashMap.Entry<String, Integer> hm : set) {
-                purchases.computeIfPresent(hm.getKey(), (key, value) -> value = purchases.get(hm.getKey()) - (promoСodes.get(hm.getKey()) * purchases.get(hm.getKey()) / 100));
+                purchases.computeIfPresent(hm.getKey(), (key, value) -> value = purchases.get(hm.getKey()) - (promoCodes.get(hm.getKey()) * purchases.get(hm.getKey()) / 100));
             }
         }
         else {
             for (HashMap.Entry<String, Integer> hm : sets) {
-                int finalDiscount = discount;
-                purchases.computeIfPresent(hm.getKey(), (key, value) -> value = purchases.get(hm.getKey()) - (finalDiscount * purchases.get(hm.getKey()) / 100));
+                purchases.computeIfPresent(hm.getKey(), (key, value) -> value = purchases.get(hm.getKey()) - (discount * purchases.get(hm.getKey()) / 100));
             }
         }
         for (HashMap.Entry<String, Integer> hm : sets) {
