@@ -1,7 +1,6 @@
 import java.util.ArrayList;
 import java.util.HashMap;
 
-
 public class Main {
 
     public static void main(String[] args) {
@@ -12,8 +11,9 @@ public class Main {
         HashMap<String, Integer> promoCodes = new HashMap<>();
         FillingHashTable fillingHashTable = new FillingHashTable();
         fillingHashTable.fillInTable(list, purchases, promoCodes);
+        HashMap<String, Integer> calculationByPromo = new HashMap<>();
         Calculations calculations = new Calculations();
-        calculations.chooseDiscount(purchases, promoCodes);
+        calculations.chooseDiscount(purchases, promoCodes, calculationByPromo);
     }
 }
 
